@@ -2,9 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>HwCicilia</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
@@ -48,8 +47,8 @@
           <h1 class="title">
             Cicilia Helena
           </h1>
-          <h2 class="subtitle">
-            Hello stranger!
+          <h2 class="subtitle" id="greet">
+            Halo Dunia!
           </h2>
           <a href="https://www.linkedin.com/in/hwcicilia/">
             <span class="icon">
@@ -69,6 +68,12 @@
       burger.onclick = function() {
           navbarMenuHeroC.classList.toggle("is-active")
       }
+    </script>
+    <script type="module">
+      import { addRandomGreeting } from "./script.js";
+      setInterval(function(){
+        addRandomGreeting()
+      }, 2000);
     </script>
 
   </body>
