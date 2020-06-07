@@ -1,22 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: turquoise;">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>HwCicilia - posts </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
-  </section>
+
+    <section class="hero is-info">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="index.html">
+                My Portfolio
+              </a>
+              <span id="burger" class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu is-info">
+              <div class="navbar-end">
+                <a class="navbar-item" href="about.html">
+                  About
+                </a>
+                <a class="navbar-item" href="projects.html">
+                  Projects
+                </a>
+                <a class="navbar-item is-active" href="posts.html">
+                  Posts
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            My Posts
+          </h1>
+          <h2 class="subtitle">
+            Primary subtitle
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      burger.onclick = function() {
+          navbarMenuHeroC.classList.toggle("is-active")
+      }
+    </script>
+
   </body>
 </html>
