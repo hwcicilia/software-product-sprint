@@ -7,3 +7,10 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+html {
+  background-image: url("images/bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}

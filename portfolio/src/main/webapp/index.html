@@ -2,17 +2,79 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>HwCicilia</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
+
+    <section class="hero is-info is-fullheight">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item is-active" href="index.html">
+                My Portfolio
+              </a>
+              <span id="burger" class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item" href="about.html">
+                  About
+                </a>
+                <a class="navbar-item" href="projects.html">
+                  Projects
+                </a>
+                <a class="navbar-item" href="posts.html">
+                  Posts
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1">
+            Cicilia Helena
+          </h1>
+          <h2 class="subtitle is-3" id="greet">
+            Halo Dunia!
+          </h2>
+          <a href="https://www.linkedin.com/in/hwcicilia/">
+            <span class="icon">
+              <i class="fab fa-linkedin has-text-warning"></i>
+            </span>
+          </a>
+          <a href="https://github.com/CiciliaHelena/">
+            <span class="icon">
+              <i class="fab fa-github has-text-warning"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      burger.onclick = function() {
+          navbarMenuHeroC.classList.toggle("is-active")
+      }
+    </script>
+    <script type="module">
+      import { addRandomGreeting } from "./script.js";
+      setInterval(function(){
+        addRandomGreeting()
+      }, 2000);
+    </script>
+
   </body>
 </html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HwCicilia - posts </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+
+    <section class="hero is-info">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="index.html">
+                My Portfolio
+              </a>
+              <span id="burger" class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu is-info">
+              <div class="navbar-end">
+                <a class="navbar-item" href="about.html">
+                  About
+                </a>
+                <a class="navbar-item" href="projects.html">
+                  Projects
+                </a>
+                <a class="navbar-item is-active" href="posts.html">
+                  Posts
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Random Posts
+          </h1>
+          <h2 class="subtitle">
+            Something more about me
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="tile is-ancestor is-vertical">
+
+          <div class="tile is-parent">
+            <article class="tile is-child box is-info">
+              <div class="content">
+                <p>
+                  I love to play board games so much. That’s the picture of me (the right most)
+                  and my friends trying to mimic the picture on
+                  <a href="https://explodingkittens.com/">“Exploding Kittens</a>”
+                  cards.
+                </p>
+                <p>
+                  My favorite board game is
+                  “<a href="https://www.unstableunicorns.com/collections/unstable-unicorns">Unstable Unicorn</a>”
+                  as it has beautiful pictures of unicorns with their magic power!
+                  My favorite character is baby unicorn, where it can flip the table to end
+                  the game anytime.-Oops just kidding.
+                </p>
+              </div>
+            </article>
+            <div class="tile is-child notification is-4 is is-info">
+              <p class="title">Board game time!</p>
+              <figure class="image is-3by2">
+                <img src="images/board_game.png">
+              </figure>
+            </div>
+          </div>
+
+          <div class="tile is-parent">
+            <div class="tile is-child notification is-info is-4">
+              <p class="title">Meet Honey</p>
+              <figure class="image is-4by5">
+                <img src="images/honey.jpg">
+              </figure>
+            </div>
+            <article class="tile is-child box">
+              <p>
+                The golden on the left named Honey. She always purposely sits between me and the TV
+                to block my view every time I watch my Netflix. Although she is sometimes annoying,
+                she never leaves me when I feel sad or lonely. She will just sit and be there, right
+                next to me. That's why I love her very much.
+              </p>
+            </article>
+          </div>
+
+          <div class="tile is-parent">
+            <div class="tile is-child notification is-info">
+              <p class="title">People Culture</p>
+              <figure class="image is-4by3">
+                <img src="images/gojek.jpg">
+              </figure>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      burger.onclick = function() {
+          navbarMenuHeroC.classList.toggle("is-active")
+      }
+    </script>
+
+  </body>
+</html>

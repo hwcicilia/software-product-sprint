@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HwCicilia - about</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+
+    <section class="hero is-info">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="index.html">
+                My Portfolio
+              </a>
+              <span id="burger" class="navbar-burger burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu is-info">
+              <div class="navbar-end">
+                <a class="navbar-item is-active" href="about.html">
+                  About
+                </a>
+                <a class="navbar-item" href="projects.html">
+                  Projects
+                </a>
+                <a class="navbar-item" href="posts.html">
+                  Posts
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            About Me
+          </h1>
+          <h2 class="subtitle">
+            Introduction
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="tile is-ancestor">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info is-4">
+              <figure class="image">
+                <img src="images/Cicilia_Helena.jpg">
+              </figure>
+            </article>
+            <article class="tile is-child box">
+              <div class="container">
+                <div class="content">
+                  <p>
+                    Hi, I'm Cicilia Helena, a final year student at Nanyang Technological University
+                    majoring in computer engineering.
+                  </p>
+                  <p>
+                    Before moving alone to Singapore to pursue my
+                    undergraduate degree, I was living with my parents in Indonesia and I miss Indonesian
+                    food so much!
+                  </p>
+                  <p>
+                    I love to explore and try new things. I always believe 
+                    <i>“if you never try yourself, you will never know, everybody is unique”.</i>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript">
+      burger.onclick = function() {
+          navbarMenuHeroC.classList.toggle("is-active")
+      }
+    </script>
+
+  </body>
+</html>
