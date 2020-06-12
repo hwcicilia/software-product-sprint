@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <script type="module">
+        import { fetchSomething } from "./script.js";
+        window.onload = fetchSomething();
+    </script>
+
   </head>
   <body>
 
@@ -44,7 +50,7 @@
       <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container">
-          <h1 class="title is-1">
+          <h1 class="title is-1" id="fetchSomething">
             Cicilia Helena
           </h1>
           <h2 class="subtitle is-3" id="greet">
