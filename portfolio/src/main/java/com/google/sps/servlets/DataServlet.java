@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.sps.data.Message;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -45,6 +48,14 @@ public class DataServlet extends HttpServlet {
     String message = getParameter(request, "message", null);
     Message messageObj = new Message(name, email, message);
     String jsonMessage = convertToJson(messageObj);
+
+    Entity newEntity = new Entity("Message");
+    newEntity.setProperty("email", email);
+    newEntity.setProperty("name", name);
+    newEntity.setProperty("message", message);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(newEntity);
+
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
   }
