@@ -40,19 +40,19 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String email = getParameter(request, "email", null);
-    String name = getParameter(request, "name", null);
-    String message = getParameter(request, "message", null);
+    String email = getParameter(request, "email");
+    String name = getParameter(request, "name");
+    String message = getParameter(request, "message");
     Message messageObj = new Message(name, email, message);
     String jsonMessage = convertToJson(messageObj);
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
   }
 
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+  private String getParameter(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
     if (value == null) {
-      return defaultValue;
+      return "";
     }
     return value;
   }
