@@ -28,16 +28,43 @@ export function addRandomGreeting() {
 }
 
 export function fetchSomething() {
-  fetch('/data').then(response => {
-    console.log(response.body)
-    return response.json()
-  }).then((text) => {
-    console.log(text)
+  fetch('/data').then(response => response.json()).then((messages) => {
     let fetchElement = document.getElementById('fetchSomething');
-    for(let i = 0; i < Object.keys(text).length; i++) {
-      let liElement = document.createElement('li');
-      liElement.innerText = text[i];
-      fetchElement.appendChild(liElement);
-    }
+    messages.forEach((message) => {
+      fetchElement.appendChild(createMessageElement(message));
+    })
   });
+}
+
+
+function createMessageElement(message) {
+  const box = document.createElement('article');
+  box.className = 'tile is-child box';
+
+  const content = document.createElement('div');
+  content.className = 'content';
+
+  const paragraph = document.createElement('p');
+
+  const name = document.createElement('strong');
+  name.innerText = message.name;
+
+  const email = document.createElement('small');
+  email.innerText = message.email;
+
+  const newLine = document.createElement('br');
+
+  const space = document.createTextNode(" ");
+
+  const messageText = document.createTextNode(message.message);
+
+  paragraph.appendChild(name)
+  paragraph.appendChild(space)
+  paragraph.appendChild(email)
+  paragraph.appendChild(newLine)
+  paragraph.appendChild(messageText)
+
+  content.appendChild(paragraph)
+  box.appendChild(content)
+  return box;
 }
