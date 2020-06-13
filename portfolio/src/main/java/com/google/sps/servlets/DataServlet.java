@@ -41,10 +41,9 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String email = null, name = null, message = null;
-    email = request.getParameter("email");
-    name = request.getParameter("name");
-    message = request.getParameter("message");
+    String email = getParameter(request, "email", null);
+    String name = getParameter(request, "name", null);
+    String message = getParameter(request, "message", null);
     Message messageObj = new Message(name, email, message);
 
     Gson gson = new Gson();
@@ -52,6 +51,14 @@ public class DataServlet extends HttpServlet {
 
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
+  }
+
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
   }
 
 }
