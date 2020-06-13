@@ -60,8 +60,6 @@ public class DataServlet extends HttpServlet {
     String email = getParameter(request, "email", null);
     String name = getParameter(request, "name", null);
     String message = getParameter(request, "message", null);
-    Message messageObj = new Message(name, email, message);
-    String jsonMessage = convertToJson(messageObj);
 
     Entity newEntity = new Entity("Message");
     newEntity.setProperty("email", email);
@@ -70,8 +68,7 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(newEntity);
 
-    response.setContentType("application/json;");
-    response.getWriter().println(jsonMessage);
+    response.sendRedirect("/index.html");
   }
 
   private String getParameter(HttpServletRequest request, String name, String defaultValue) {
