@@ -17,6 +17,9 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Message;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -32,10 +35,21 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    ArrayList<String> messages = new ArrayList<String>();
-    messages.add("first message");
-    messages.add("second message");
-    messages.add("third message");
+    ArrayList<Message> messages = new ArrayList<Message>();
+
+    Query query = new Query("Message");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      String email = (String) entity.getProperty("email");
+      String name = (String) entity.getProperty("name");
+      String message = (String) entity.getProperty("message");
+
+      Message messageObj = new Message(name, email, message);
+      messages.add(messageObj);
+    }
+
     String jsonMessage = convertToJson(messages);
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
