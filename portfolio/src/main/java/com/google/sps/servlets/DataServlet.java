@@ -33,8 +33,7 @@ public class DataServlet extends HttpServlet {
     messages.add("first message");
     messages.add("second message");
     messages.add("third message");
-    Gson gson = new Gson();
-    String jsonMessage = gson.toJson(messages);
+    String jsonMessage = convertToJson(messages);
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
   }
@@ -45,10 +44,7 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name", null);
     String message = getParameter(request, "message", null);
     Message messageObj = new Message(name, email, message);
-
-    Gson gson = new Gson();
-    String jsonMessage = gson.toJson(messageObj);
-
+    String jsonMessage = convertToJson(messageObj);
     response.setContentType("application/json;");
     response.getWriter().println(jsonMessage);
   }
@@ -59,6 +55,12 @@ public class DataServlet extends HttpServlet {
       return defaultValue;
     }
     return value;
+  }
+
+  private String convertToJson(Object any) {
+    Gson gson = new Gson();
+    String json = gson.toJson(any);
+    return json;
   }
 
 }
