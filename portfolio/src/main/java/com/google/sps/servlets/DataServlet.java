@@ -87,8 +87,8 @@ public class DataServlet extends HttpServlet {
 
   private String getParameterWithEmptyStringDefault(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
-    if (value == null || value.isEmpty()) {
-      return "";
+    if (value == null) {
+      throw new java.lang.Error("parameter "+name+" is null");
     }
     return value;
   }
