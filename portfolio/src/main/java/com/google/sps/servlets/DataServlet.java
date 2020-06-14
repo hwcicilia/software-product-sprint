@@ -61,6 +61,13 @@ public class DataServlet extends HttpServlet {
     String name = getParameter(request, "name");
     String message = getParameter(request, "message");
 
+    if (email.isEmpty() || name.isEmpty() || message.isEmpty()) {
+      response.setContentType("text/html;");
+      response.getWriter().println("<meta http-equiv='refresh' content='3;URL=index.html'>");
+      response.getWriter().println("<p style='color:red;'>All form fields must not be empty</p>");
+      return;
+    }
+
     Entity newEntity = new Entity("Message");
     newEntity.setProperty("email", email);
     newEntity.setProperty("name", name);
@@ -73,7 +80,7 @@ public class DataServlet extends HttpServlet {
 
   private String getParameter(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
-    if (value == null) {
+    if (value == null || value.isEmpty()) {
       return "";
     }
     return value;
