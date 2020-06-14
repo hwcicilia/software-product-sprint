@@ -33,13 +33,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private Gson gson;
+  private DatastoreService datastore;
+
+  @Override
+  public void init() {
+    this.gson = new Gson();
+    this.datastore = DatastoreServiceFactory.getDatastoreService();
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ArrayList<Message> messages = new ArrayList<Message>();
 
     Query query = new Query("Message");
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
+    PreparedQuery results = this.datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
       String email = (String) entity.getProperty("email");
@@ -72,8 +80,7 @@ public class DataServlet extends HttpServlet {
     newEntity.setProperty("email", email);
     newEntity.setProperty("name", name);
     newEntity.setProperty("message", message);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(newEntity);
+    this.datastore.put(newEntity);
 
     response.sendRedirect("/index.html");
   }
@@ -87,8 +94,7 @@ public class DataServlet extends HttpServlet {
   }
 
   private String convertToJson(Object any) {
-    Gson gson = new Gson();
-    String json = gson.toJson(any);
+    String json = this.gson.toJson(any);
     return json;
   }
 
