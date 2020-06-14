@@ -133,9 +133,7 @@
 
       <script>
         function clearAll() {
-          document.forms.myform.elements.name.value = null
-          document.forms.myform.elements.email.value = null
-          document.forms.myform.elements.message.value = null
+          document.getElementById("myform").reset();
         }
       </script>
 
