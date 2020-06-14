@@ -65,9 +65,9 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String email = getParameter(request, "email");
-    String name = getParameter(request, "name");
-    String message = getParameter(request, "message");
+    String email = getParameterWithEmptyStringDefault(request, "email");
+    String name = getParameterWithEmptyStringDefault(request, "name");
+    String message = getParameterWithEmptyStringDefault(request, "message");
 
     if (email.isEmpty() || name.isEmpty() || message.isEmpty()) {
       response.setContentType("text/html;");
@@ -85,7 +85,7 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/index.html");
   }
 
-  private String getParameter(HttpServletRequest request, String name) {
+  private String getParameterWithEmptyStringDefault(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
     if (value == null || value.isEmpty()) {
       return "";
