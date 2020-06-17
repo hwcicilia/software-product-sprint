@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>HwCicilia</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
@@ -50,7 +49,7 @@
       <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container">
-          <h1 class="title is-1" id="fetchSomething">
+          <h1 class="title is-1">
             Cicilia Helena
           </h1>
           <h2 class="subtitle is-3" id="greet">
@@ -81,6 +80,78 @@
         addRandomGreeting()
       }, 2000);
     </script>
+
+    <section class="section">
+      <div class="level">
+        <div class="level-item content">
+          <h1>Leave me a message!</h1>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-item">
+          <form action="/data" method="post" id="myform">
+
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-info" type="text" placeholder="Full Name" name="name" required="required">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-info" type="email" placeholder="email@example.com" name="email"required="required">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea class="textarea is-info" placeholder="Message for Cicilia..." name="message" required="required"></textarea>
+              </div>
+            </div>
+
+            <div class="field is-grouped">
+              <div class="control">
+                <button class="button is-link">Submit</button>
+              </div>
+              <div>
+                <button class="button is-link is-light" type="button" onclick="clearAll()">Clear</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <script>
+        function clearAll() {
+          document.getElementById("myform").reset();
+        }
+      </script>
+
+    </section>
+
+    <section class="section" style="background-color:#209CEE">
+      <div class="level">
+        <div class="level-item content">
+          <h1 style="color:white">Posted Messages</h1>
+        </div>
+      </div>
+      <div class="level">
+        <div class="tile is-ancestor level-item">
+          <div class="tile is-parent is-vertical is-4" id="fetchSomething">
+          </div>
+        </div>
+      </div>
+    </section>
 
   </body>
 </html>
