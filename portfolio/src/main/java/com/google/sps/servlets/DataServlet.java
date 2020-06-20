@@ -20,6 +20,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 import com.google.sps.data.Message;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -53,8 +56,9 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty("email");
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
+      float sentimentScore = (float) entity.getProperty("sentimentScore");
 
-      Message messageObj = new Message(name, email, message);
+      Message messageObj = new Message(name, email, message, sentimentScore);
       messages.add(messageObj);
     }
 
@@ -76,10 +80,20 @@ public class DataServlet extends HttpServlet {
       return;
     }
 
+    float sentimentScore = 2;
+    try (LanguageServiceClient languageService = LanguageServiceClient.create()) {
+      Document doc = Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
+      Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+      sentimentScore = sentiment.getScore();
+    } catch(Exception e) {
+        throw new java.lang.Error("Sentiment API is not configured properly, please check auth token");
+    }
+
     Entity newEntity = new Entity("Message");
     newEntity.setProperty("email", email);
     newEntity.setProperty("name", name);
     newEntity.setProperty("message", message);
+    newEntity.setProperty("sentimentScore", sentimentScore);
     this.datastore.put(newEntity);
 
     response.sendRedirect("/index.html");
@@ -88,7 +102,7 @@ public class DataServlet extends HttpServlet {
   private String getParameterWithEmptyStringDefault(HttpServletRequest request, String name) {
     String value = request.getParameter(name);
     if (value == null) {
-      throw new java.lang.Error("parameter "+name+" is null");;
+      throw new java.lang.Error("parameter "+name+" is null");
     }
     return value;
   }
