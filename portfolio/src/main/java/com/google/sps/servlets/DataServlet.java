@@ -56,7 +56,7 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty("email");
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
-      float sentimentScore = (float) entity.getProperty("sentimentScore");
+      Double sentimentScore = (Double) entity.getProperty("sentimentScore");
 
       Message messageObj = new Message(name, email, message, sentimentScore);
       messages.add(messageObj);
@@ -80,7 +80,7 @@ public class DataServlet extends HttpServlet {
       return;
     }
 
-    float sentimentScore = 2;
+    float sentimentScore = 2f;
     try (LanguageServiceClient languageService = LanguageServiceClient.create()) {
       Document doc = Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
       Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
