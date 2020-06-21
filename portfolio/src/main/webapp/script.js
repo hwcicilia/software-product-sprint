@@ -52,12 +52,27 @@ function createMessageElement(message) {
   const email = document.createElement('small');
   email.innerText = message.email;
 
+  const emot = document.createElement('span');
+  emot.style.fontSize = "2vw";
+  if (message.sentimentScore < -0.8) {
+    emot.innerText = String.fromCodePoint(0x1F525);
+  } else if (message.sentimentScore < -0.2) {
+    emot.innerText = String.fromCodePoint(128542);
+  } else if (message.sentimentScore < 0.2) {
+    emot.innerText = String.fromCodePoint(128528);
+  } else if (message.sentimentScore < 0.7) {
+    emot.innerText = String.fromCodePoint(128578);
+  } else {
+    emot.innerText = String.fromCodePoint(128516);
+  }
+
   const newLine = document.createElement('br');
 
   const space = document.createTextNode(" ");
 
   const messageText = document.createTextNode(message.message);
 
+  paragraph.appendChild(emot)
   paragraph.appendChild(name)
   paragraph.appendChild(space)
   paragraph.appendChild(email)
