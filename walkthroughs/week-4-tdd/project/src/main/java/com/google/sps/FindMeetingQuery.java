@@ -17,11 +17,12 @@ package com.google.sps;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> attendees = request.getAttendees();
-    ArrayList<TimeRange> relatedEvents = new ArrayList<TimeRange>();
+    List<TimeRange> relatedEvents = new ArrayList<TimeRange>();
     Collection<TimeRange> ans = new ArrayList<TimeRange>();
 
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
