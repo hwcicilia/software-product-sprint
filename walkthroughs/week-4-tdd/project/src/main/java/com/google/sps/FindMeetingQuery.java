@@ -63,7 +63,7 @@ public final class FindMeetingQuery {
     return answers;
   }
 
-  private List<TimeRange> getRelatedEvents(Collection<Event> events, Collection<String> attendees) {
+  private static List<TimeRange> getRelatedEvents(Collection<Event> events, Collection<String> attendees) {
     List<TimeRange> relatedEvents = new ArrayList<TimeRange>();
     for (Event event: events){
         for (String attendee: attendees) {
