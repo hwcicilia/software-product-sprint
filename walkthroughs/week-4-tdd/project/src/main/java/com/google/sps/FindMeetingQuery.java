@@ -23,10 +23,10 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> attendees = request.getAttendees();
     List<TimeRange> relatedEvents = new ArrayList<TimeRange>();
-    Collection<TimeRange> ans = new ArrayList<TimeRange>();
+    Collection<TimeRange> answers = new ArrayList<TimeRange>();
 
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-        return ans;
+        return answers;
     }
 
     for (Event event: events){
@@ -39,8 +39,8 @@ public final class FindMeetingQuery {
     }
 
     if (relatedEvents.isEmpty()) {
-        ans.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true));
-        return ans;
+        answers.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true));
+        return answers;
     }
 
     Collections.sort(relatedEvents, TimeRange.ORDER_BY_START);
@@ -48,7 +48,7 @@ public final class FindMeetingQuery {
     int pointerA = 0, pointerB = 0;
 
     if (TimeRange.START_OF_DAY + request.getDuration() <= relatedEvents.get(0).start()) {
-        ans.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, relatedEvents.get(0).start(), false));
+        answers.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, relatedEvents.get(0).start(), false));
     }
 
     while (pointerB < relatedEvents.size()) {
@@ -56,16 +56,16 @@ public final class FindMeetingQuery {
             pointerB++;
             continue;
         } else if (relatedEvents.get(pointerA).end() + request.getDuration() <= relatedEvents.get(pointerB).start()) {
-            ans.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), relatedEvents.get(pointerB).start(), false));
+            answers.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), relatedEvents.get(pointerB).start(), false));
         }
         pointerA = pointerB;
         pointerB++;
     }
 
     if (relatedEvents.get(relatedEvents.size() - 1).end() + request.getDuration() <= TimeRange.END_OF_DAY) {
-        ans.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), TimeRange.END_OF_DAY, true));
+        answers.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), TimeRange.END_OF_DAY, true));
     }
 
-    return ans;
+    return answers;
   }
 }
