@@ -53,9 +53,11 @@ public final class FindMeetingQuery {
 
     while (pointerB < relatedEvents.size()) {
         if (relatedEvents.get(pointerA).end() >= relatedEvents.get(pointerB).end()) {
+            // if pointerB is a nested event of pointerA, then skip pointerB
             pointerB++;
             continue;
         } else if (relatedEvents.get(pointerA).end() + request.getDuration() <= relatedEvents.get(pointerB).start()) {
+            // if there is enough time for the request, between 2 meeting, then add it to the answers
             answers.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), relatedEvents.get(pointerB).start(), false));
         }
         pointerA = pointerB;
