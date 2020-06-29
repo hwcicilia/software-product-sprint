@@ -22,21 +22,13 @@ import java.util.List;
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Collection<String> attendees = request.getAttendees();
-    List<TimeRange> relatedEvents = new ArrayList<TimeRange>();
     Collection<TimeRange> answers = new ArrayList<TimeRange>();
 
     if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
         return answers;
     }
 
-    for (Event event: events){
-        for (String attendee: attendees) {
-            if (event.getAttendees().contains(attendee)) {
-                relatedEvents.add(event.getWhen());
-                break;
-            }
-        }
-    }
+    List<TimeRange> relatedEvents = getRelatedEvents(events, attendees);
 
     if (relatedEvents.isEmpty()) {
         answers.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY, true));
@@ -70,4 +62,18 @@ public final class FindMeetingQuery {
 
     return answers;
   }
+
+  private List<TimeRange> getRelatedEvents(Collection<Event> events, Collection<String> attendees) {
+    List<TimeRange> relatedEvents = new ArrayList<TimeRange>();
+    for (Event event: events){
+        for (String attendee: attendees) {
+            if (event.getAttendees().contains(attendee)) {
+                relatedEvents.add(event.getWhen());
+                break;
+            }
+        }
+    }
+    return relatedEvents;
+  }
+
 }
