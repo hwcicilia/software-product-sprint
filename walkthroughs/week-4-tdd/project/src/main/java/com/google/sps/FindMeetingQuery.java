@@ -45,17 +45,12 @@ public final class FindMeetingQuery {
     Collections.sort(relatedEvents, TimeRange.ORDER_BY_START);
 
     int pointerA = 0, pointerB = 0;
-    int last = 0;
 
     if (TimeRange.START_OF_DAY + request.getDuration() <= relatedEvents.get(0).start()) {
         ans.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, relatedEvents.get(0).start(), false));
     }
 
     while (pointerB < relatedEvents.size()) {
-        if (last < relatedEvents.get(pointerB).end()) {
-            last = relatedEvents.get(pointerB).end();
-        }
-
         if (relatedEvents.get(pointerA).end() >= relatedEvents.get(pointerB).end()) {
             pointerB++;
             continue;
@@ -67,7 +62,7 @@ public final class FindMeetingQuery {
     }
 
     if (relatedEvents.get(relatedEvents.size() - 1).end() + request.getDuration() <= TimeRange.END_OF_DAY) {
-        ans.add(TimeRange.fromStartEnd(last, TimeRange.END_OF_DAY, true));
+        ans.add(TimeRange.fromStartEnd(relatedEvents.get(pointerA).end(), TimeRange.END_OF_DAY, true));
     }
 
     return ans;
